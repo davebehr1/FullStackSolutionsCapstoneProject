@@ -3,6 +3,10 @@ node_js:
   - "stable"
 services:
   - mongodb
+addons:
+  sauce_connect:
+    username: "AmmarahCassim"
+    access_key: "24302255-f2d7-46f5-ac1c-9c90ec0eff11"
 install:
     - npm install
 before_script:
