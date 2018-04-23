@@ -1,16 +1,12 @@
-var assert = require("assert");
-var webdriver = require("selenium-webdriver");
-
-describe("testing javascript in the browser", function() {
-  beforeEach(function() {
-    if (process.env.user_name != undefined) {
+ beforeEach(function() {
+    if (process.env.SAUCE_USERNAME != undefined) {
       this.browser = new webdriver.Builder()
-      .usingServer('http://'+ process.env.user_name+':'+process.env.access_key+'@ondemand.saucelabs.com:80/wd/hub')
+      .usingServer('http://'+ process.env.SAUCE_USERNAME+':'+process.env.SAUCE_ACCESS_KEY+'@ondemand.saucelabs.com:80/wd/hub')
       .withCapabilities({
         'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER,
         build: process.env.TRAVIS_BUILD_NUMBER,
-        username: process.env.user_name,
-        accessKey: process.env.access_key,
+        username: process.env.SAUCE_USERNAME,
+        accessKey: process.env.SAUCE_ACCESS_KEY,
         browserName: "chrome"
       }).build();
     } else {
@@ -21,20 +17,4 @@ describe("testing javascript in the browser", function() {
     }
 
     return this.browser.get("http://localhost:3000/page/index.html");
-  });
-
-  afterEach(function() {
-    return this.browser.quit();
-  });
-
-  it("should handle clicking on a headline", function(done) {
-    var headline = this.browser.findElement(webdriver.By.css('h1'));
-
-    headline.click();
-
-    headline.getText().then(function(txt) {
-      assert.equal(txt, "awesome");
-      done();
-    });
-  });
 });
