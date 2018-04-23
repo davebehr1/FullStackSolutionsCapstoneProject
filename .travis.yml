@@ -13,4 +13,4 @@ before_script:
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
   - node Server.js
 script: 
-- pkill('node')
+- node testfiles/test1.js
