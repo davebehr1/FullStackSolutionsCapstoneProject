@@ -14,4 +14,3 @@ before_script:
   - node Server.js &
 script: 
  - ./testfiles/test1.js
- - pkill('Server.js')
