@@ -11,6 +11,6 @@ install:
     - npm install
 before_script:
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-  - node Server.js
+  - node Server.js &
 script: 
  - ./testfiles/test1.js
